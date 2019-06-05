@@ -14,7 +14,7 @@ import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+print("Con platform jaloooooooooooooooooooooooooooo")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['']
 
@@ -130,10 +130,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-try:
-    from arqui.local_settings import *
-except ImportError:
-    pass
+SECRET_KEY = '-(!w4wx5fc34(gk703+u40_sctk-m406q^ibl)(f27t!snw45#'
+DATABASES = {
+    'default': {
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : 'arqui',
+        'USER': 'lalo',
+        'PASSWORD': '123467',
+        'HOST': '192.168.1.78',
+        'PORT': '3306'
+    }
+}
 
 if not DEBUG:
     SECRET_KEY = 'SECRET_KEY'
@@ -144,7 +151,7 @@ if not DEBUG:
             'USER': 'DB_USER',
             'PASSWORD': 'DB_PASSWORD',
             'HOST': 'DB_HOST',
-            'PORT': 'DB_PORT'
+            'PORT': ''
         }
     } 
 

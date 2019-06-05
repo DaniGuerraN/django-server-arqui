@@ -1,4 +1,5 @@
 
+
 # Paqueterias a instalar
 # # pip install django-heroku
 # # dj-database-url
@@ -7,6 +8,7 @@
 # # python-decouple
 
 import os
+import platform
 # Importaciones necesarios de heroku inicio
 from decouple import config
 import dj_database_url
@@ -23,12 +25,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['']
+sisop = platform.system()
+sisop2= platform.platform()
 
 
+print ("estamos en platplat {}".format(sisop2))
+print ("estamos en sys {}".format(sisop))
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -130,10 +137,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-try:
-    from arqui.local_settings import *
-except ImportError:
-    pass
+if sisop2 == 'Linux-4.19.42-v7+-armv7l-with-debian-9.9':
+    try:
+        from arqui.rasp_settings import *
+    except ImportError:
+        pass
+else: 
+    try:
+        from arqui.local_settings import *
+    except ImportError:
+        pass        
+
 
 if not DEBUG:
     SECRET_KEY = 'SECRET_KEY'
@@ -146,7 +160,8 @@ if not DEBUG:
             'HOST': 'DB_HOST',
             'PORT': 'DB_PORT'
         }
-    } 
+    }
 
     import django_heroku
     django_heroku.settings(locals())
+
