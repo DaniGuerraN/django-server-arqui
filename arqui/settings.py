@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://django-server-arqui.herokuapp.com']
+ALLOWED_HOSTS = ['django-server-arqui.herokuapp.com']
 sisop = platform.system()
 sisop2= platform.platform()
 
@@ -142,7 +142,7 @@ if sisop2 == 'Linux-4.19.42-v7+-armv7l-with-debian-9.9':
         from arqui.rasp_settings import *
     except ImportError:
         pass
-else: 
+if DEBUG: 
     try:
         from arqui.local_settings import *
     except ImportError:
