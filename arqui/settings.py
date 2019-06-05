@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['django-server-arqui.herokuapp.com']
+ALLOWED_HOSTS = ['']
 sisop = platform.system()
 sisop2= platform.platform()
 
