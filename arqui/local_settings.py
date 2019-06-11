@@ -101,12 +101,12 @@ WSGI_APPLICATION = 'arqui.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'arqui',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': '192.168.1.73',
-        'PORT': '5432'
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : 'arquidb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 

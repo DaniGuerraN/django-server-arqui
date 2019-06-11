@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['']
 sisop = platform.system()
@@ -142,12 +142,11 @@ if sisop2 == 'Linux-4.19.42-v7+-armv7l-with-debian-9.9':
         from arqui.rasp_settings import *
     except ImportError:
         pass
-if DEBUG: 
+else:
     try:
         from arqui.local_settings import *
     except ImportError:
-        pass        
-
+        pass           
 
 if not DEBUG:
     SECRET_KEY = 'SECRET_KEY'
