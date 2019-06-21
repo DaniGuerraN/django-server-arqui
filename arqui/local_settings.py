@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'example',
     'rest_framework',
     'rest_framework.authtoken',
+    'Registro'
 ]
 
 MIDDLEWARE = [

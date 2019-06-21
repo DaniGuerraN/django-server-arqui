@@ -1,10 +1,21 @@
 from django.db import models
 from django.utils import timezone
 
-class Example(models.Model):
-    idExample2 = models.ForeignKey(Example2, on_delete= models.CASCADE)
+class RFID(models.Model):
+    id_Asistencia = models.ForeignKey(Asistencia, on_delete=models.CASCADE)
+    rfid = models.CharField(max_length=254, null=False)
+    delete = models.BooleanField(default=False)
+    create = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.rfid
+
+    class Meta:
+        db_table = 'Rfid'
+
+class Asistencia(models.Model):
     name = models.CharField(max_length=254, null=False)
-    year = models.IntegerField(null=False)
+    matricula = models.IntegerField(max_value= 9,null=False)
     delete = models.BooleanField(default=False)
     create = models.DateTimeField(default=timezone.now)
 
@@ -12,19 +23,4 @@ class Example(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'Example'
-
-class Example2(models.Model):
-    name = models.CharField(max_length=254, null=False)
-    year = models.IntegerField(null=False)
-    delete = models.BooleanField(default=False)
-    create = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        db_table = 'Example2'
-
-
-#BORRAR BD PARA PODER TRABAJAR Y CACHE EN LA CARPETA MIGRATIONS
+        db_table = 'Asistencia'

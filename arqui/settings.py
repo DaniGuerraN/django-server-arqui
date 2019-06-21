@@ -32,8 +32,6 @@ sisop = platform.system()
 sisop2= platform.platform()
 
 
-print ("estamos en platplat {}".format(sisop2))
-print ("estamos en sys {}".format(sisop))
 # Application definition
 
 
@@ -50,6 +48,7 @@ INSTALLED_APPS = [
     'example',
     'rest_framework',
     'rest_framework.authtoken',
+    'Registro',
 ]
 
 MIDDLEWARE = [
