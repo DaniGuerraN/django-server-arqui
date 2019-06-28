@@ -13,3 +13,5 @@ class AsistenciaSerializers(serializers.ModelSerializer):
     class Meta:
         model = Asistencia
         fields = ('__all__')
+
+        ################
