@@ -38,7 +38,7 @@ class ExampleDetail(APIView):
         except Example.DoesNoExist:
             return 404
 
-    def get(self, request, format=None, id):
+    def get(self, request, id, format=None):
         example = self.get_object(id)
         if example != 404:
             #many = True, no aplica si se retorna solo un objeto
@@ -88,7 +88,7 @@ class ExampleDetail2(APIView):
         except Example2.DoesNoExist:
             return 404
 
-    def get(self, request, format=None, id):
+    def get(self, request, id, format=None):
         example = self.get_object(id)
         if example != 404:
             #many = True, no aplica si se retorna solo un objeto

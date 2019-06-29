@@ -1,12 +1,12 @@
 from rest_framework import routers, serializers, viewsets
 
 # -------------AGREGANDO MODELOS-----------------
-from Registro.models import RFID
+from Registro.models import Alumno
 from Registro.models import Asistencia
 
-class RFIDSerializers(serializers.ModelSerializer):
+class AlumnoSerializers(serializers.ModelSerializer):
     class Meta:
-        model = RFID
+        model = Alumno
         fields = ('__all__')
 
 class AsistenciaSerializers(serializers.ModelSerializer):

@@ -6,21 +6,21 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 
-from Registro.models import RFID
+from Registro.models import Alumno
 from Registro.models import Asistencia
 
-from Registro.serializer import RFIDSerializers
+from Registro.serializer import AlumnoSerializers
 from Registro.serializer import AsistenciaSerializers
 
-class RFIDList(APIView):
+class AlumnoList(APIView):
     def get(self, request, format=None):
-        queryset = RFID.objects.filter(delete = False)  #id.example2 = id.example
+        queryset = Alumno.objects.filter(delete = False)  #id.example2 = id.example
         #many = True, si aplica si se retorna varios objetos
-        serializer = RFIDSerializers(queryset, many = True)
+        serializer = AlumnoSerializers(queryset, many = True)
         return Response(serializer.data)
 
-     def post(self, request, format=None):
-        serializer = RFIDSerializers(data = request.data)
+    def post(self, request, format=None):
+        serializer = AlumnoSerializers(data = request.data)
         if serializer.is_valid():
             serializer.save()
             datas = serializer.data
@@ -28,25 +28,25 @@ class RFIDList(APIView):
             return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-class RFIDDetail(APIView):
+class AlumnoDetail(APIView):
     def get_object(self, id):
         try: 
-            return RFID.objects.get(pk= id, delete = False)
-        except RFID.DoesNoExist:
+            return Alumno.objects.get(pk= id, delete = False)
+        except Alumno.DoesNoExist:
             return 404
     
-    def get(self, request, format= None, id):
-        rfid = self.get_object(id)
-        if rfid != 404:
-            serializer = RFIDSerializers(rfid)
+    def get(self, request, id, format= None):
+        alumno = self.get_object(id)
+        if alumno != 404:
+            serializer = AlumnoSerializers(alumno)
             return Response(serializer.data)
         else:
-            return Response(rfid, status = status.HTTP_400_BAD_REQUEST)
+            return Response(alumno, status = status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id, format=None):
-        rfid = self.get_object(id)
-        if rfid != 404:
-            serializer = RFIDSerializers(rfid, data=request.data)
+        alumno = self.get_object(id)
+        if alumno != 404:
+            serializer = AlumnoSerializers(rfid, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 datas = serializer.data
@@ -64,7 +64,7 @@ class AsistenciaList(APIView):
         serializer = AsistenciaSerializers(queryset, many = True)
         return Response(serializer.data)
 
-     def post(self, request, format=None):
+    def post(self, request, format=None):
         serializer = AsistenciaSerializers(data = request.data)
         if serializer.is_valid():
             serializer.save()
@@ -80,7 +80,7 @@ class AsistenciaDetail(APIView):
         except Asistencia.DoesNoExist:
             return 404
     
-    def get(self, request, format= None, id):
+    def get(self, request, id,format= None):
         asistencia = self.get_object(id)
         if asistencia != 404:
             serializer = AsistenciaSerializers(asistencia)
