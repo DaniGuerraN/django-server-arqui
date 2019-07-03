@@ -11,7 +11,8 @@ class Alumno(models.Model):
     fecha_hora = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return str(self.id)
+        newValue ={'id':srt(self.id),'fecha_hora':srt(self.fecha_hora)} 
+        return newValue
 
     class Meta:
         db_table = 'Alumno'
