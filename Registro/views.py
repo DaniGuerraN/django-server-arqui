@@ -1,5 +1,8 @@
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
+import datetime 
+import json
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -65,13 +68,51 @@ class AsistenciaList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = AsistenciaSerializers(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            datas = serializer.data
+        
+        dato2= request.data
+        print(dato2)
+        datos=request.data["rfid"]
+        print(datos)
+        #datos2 = request.data["id_Alumno"]
+        diccionario={'rfid':datos}
+        ##enciclopedia={'fecha_hora': dato2}
+        #stringData = json.dumps('{rfid:' + datos + '}')
+        #jsonData= json.loads(stringData)
+        #print(jsonData)
+        serializer = AlumnoSerializers(data = diccionario)
+        ##serializer4 = AlumnoSerializers(data = enciclopedia)
+        if serializer.is_valid(): #and serializer4.is_valid():
+            try:
+                AlumnoData = Alumno.objects.get(rfid= diccionario['rfid'], delete = False)
+                #AlumnoFecha = Alumno.objects.get(create = enciclopedia['fecha_hora'], delete = False)
+                # y = json.dumps(AlumnoData)
+                print(AlumnoData.id)
+                #print(AlumnoFecha)
+                diccionario1 = {'id_Alumno':AlumnoData.id }
+                #enciclopedia1 = {'fecha_hora': AlumnoFecha.create}
+                #serializer3 = AsistenciaSerializers(data=enciclopedia1)
+                serializer1 = AsistenciaSerializers(data = diccionario1)
+                print(serializer1)
+                if serializer1.is_valid(): #and serializer3.is_valid():
+                    #if not serializer3.data == datetime.date.today():
+                    serializer1.save()
+                    #else:
+                        #return Response("Asistencia ya existente")
+                    return Response("Guardado")
+                else:
+                    return Response("Fallo")
+            except Alumno.DoesNotExist:
+                diccionario2 = {'rfid': datos,'name':'TestName2','matricula':'173221'}
+                serializer2 = AlumnoSerializers(data = diccionario2)
+                if serializer2.is_valid():
+                    serializer2.save()
+                else:
+                    print(diccionario2)
+                return Response(diccionario2)
 
-            return Response(datas)
+            # return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        
 
 class AsistenciaDetail(APIView):
     def get_object(self, id):
