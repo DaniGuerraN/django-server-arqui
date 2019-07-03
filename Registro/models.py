@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import datetime
+from rest_framework.response import Response
 
 class Alumno(models.Model):
     name = models.CharField(max_length=254, null=True)
@@ -10,8 +11,8 @@ class Alumno(models.Model):
     create = models.DateTimeField(default=timezone.now)
     fecha_hora = models.DateField(default=datetime.date.today)
 
-    def __str__(self):
-        return str(self.id)
+    def Alumno(self):
+        return self
 
     class Meta:
         db_table = 'Alumno'
@@ -22,9 +23,10 @@ class Asistencia(models.Model):
     delete = models.BooleanField(default=False)
     create = models.DateTimeField(default=timezone.now)
     fecha_hora = models.DateField(default=datetime.date.today)
-
     def __str__(self):
         return self.id_Alumno
+    # def Asistencia(self):
+    #     return self
 
     class Meta:
         db_table = 'Asistencia'
