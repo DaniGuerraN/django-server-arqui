@@ -87,6 +87,7 @@ class AsistenciaList(APIView):
                 #AlumnoFecha = Alumno.objects.get(create = enciclopedia['fecha_hora'], delete = False)
                 # y = json.dumps(AlumnoData)
                 print(AlumnoData.id)
+                #>>>>>print(AlumnoData['id'])
                 #print(AlumnoFecha)
                 diccionario1 = {'id_Alumno':AlumnoData.id }
                 #enciclopedia1 = {'fecha_hora': AlumnoFecha.create}
